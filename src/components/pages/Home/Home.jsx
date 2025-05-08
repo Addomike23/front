@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../navbar/Navbar";
 import Hero from "../hero/Hero";
 import Promo from "../promo/Promo";
-import ShopCategory from "../shopcategory/shopCategory";
+import ShopCategory from "../shopcategory/ShopCategory";
 import WhyChooseUs from "../why choose us/WhyChooseUs";
 import Footer from "../footer/Footer";
 import ScrollFadeIn from "../../animation/ScrollFadeIn";
