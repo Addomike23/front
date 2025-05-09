@@ -14,7 +14,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [mloader, setMloader] = useState(true)
     const [showPassword, setShowPassword] = useState(false);
-    const BASE_URL = "http://localhost:5000/auth/";
+    const BASE_URL = "https://myke-bern.onrender.com/auth"
     const navigate = useNavigate();
 
     const handleChange = (e) => {
