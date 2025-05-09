@@ -59,6 +59,7 @@ function Signup() {
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed. Try again.");
             toast.error("Signup failed. Try again.");
+            console.log(err);
         } finally {
             setLoading(false);
         }
