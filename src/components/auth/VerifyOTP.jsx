@@ -15,7 +15,7 @@ const VerifyOTP = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email;
-    const BASE_URL = "http://localhost:5000/auth/";
+     const BASE_URL = "https://myke-bern.onrender.com/auth/"
     axios.defaults.withCredentials = true
 
 
