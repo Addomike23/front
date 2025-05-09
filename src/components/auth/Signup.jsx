@@ -16,7 +16,7 @@ function Signup() {
     const [success, setSuccess] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const BASE_URL = "https://myke-bern.onrender.com/auth"
+    const BASE_URL = "https://myke-bern.onrender.com/auth/"
     axios.defaults.withCredentials = true;
 
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -40,7 +40,7 @@ function Signup() {
                 return;
             }
 
-            const response = await axios.post(`${BASE_URL}/signup`, input);
+            const response = await axios.post(`${BASE_URL}signup`, input);
             if (response.status === 201) {
                 setSuccess(true);
                 Cookies.set("authorization", response.data.signinToken, {
