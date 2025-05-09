@@ -6,7 +6,7 @@ const CartContext = createContext();
 // Provider component
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://myke-bern.onrender.com";
 
 
   // Add item to cart
