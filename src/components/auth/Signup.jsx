@@ -16,7 +16,7 @@ function Signup() {
     const [success, setSuccess] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const BASE_URL = "http://localhost:5000/auth/";
+    const BASE_URL = "https://myke-bern.onrender.com/auth"
     axios.defaults.withCredentials = true;
 
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
