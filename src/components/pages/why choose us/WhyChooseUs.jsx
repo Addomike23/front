@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useCart } from "../context/Context";
 import {
   ShieldCheck,
   ThumbsUp,
@@ -11,7 +12,7 @@ import {
 
 const WhyChooseUs = () => {
   const [whychooseus, setWhychooseus] = useState([]);
-  const BASE_URL = "http://localhost:5000/";
+  const {BASE_URL} = useCart();
 
   useEffect(() => {
     const fetchMessages = async () => {
