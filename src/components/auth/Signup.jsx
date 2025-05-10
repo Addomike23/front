@@ -84,7 +84,7 @@ function Signup() {
                     <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-t-4 border-orange-400"></div>
                 </div>
             ) : (
-                <div className="login-bg h-screen flex items-center justify-center text-gray-900 px-10">
+                               <div className="login-bg h-screen flex flex-col md:flex-row items-center justify-center text-gray-900 px-4 md:px-10 gap-8">
                     {/* Left side */}
                     <div className="w-1/2 text-center p-6 rounded-xl shadow-lg">
                         <h1 className="font-extrabold text-2xl text-white mb-4 leading-snug">
