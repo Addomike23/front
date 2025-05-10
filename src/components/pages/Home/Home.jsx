@@ -56,9 +56,9 @@ export default function Home() {
                         </ScrollFadeIn>
 
                         {/* featured products */}
-                        <ScrollFadeIn direction="up">
+                        
                             <FeaturedProducts />
-                        </ScrollFadeIn>
+                        
 
                         {/* Promo section */}
                         <ScrollFadeIn direction="up">
@@ -71,13 +71,13 @@ export default function Home() {
                         </ScrollFadeIn>
                         {/* Hero section */}
                         {/* Shop by category */}
-                        <ScrollFadeIn direction="up">
+                        
                             <ShopCategory category={category} setCategory={setCategory} />
-                        </ScrollFadeIn>
+                      
 
-                        <ScrollFadeIn direction="up">
+                       
                             <Hero category={category} />
-                        </ScrollFadeIn>
+                        
 
                         {/* auto play video */}
                         <ScrollFadeIn direction="up">
