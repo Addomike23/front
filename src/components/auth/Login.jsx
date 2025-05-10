@@ -14,7 +14,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [mloader, setMloader] = useState(true)
     const [showPassword, setShowPassword] = useState(false);
-    const BASE_URL = "https://myke-bern.onrender.com/auth/"
+    const BASE_URL = "https://myke-bern.onrender.com"
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -27,7 +27,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            await axios.post(`${BASE_URL}` + "signin", input);
+            await axios.post(`${BASE_URL}` + "/auth/signin", input);
 
             if (response.status === 201) {
                 setSuccess(true);
