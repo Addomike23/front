@@ -27,7 +27,6 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path='/' element={<Home />} />
-        <Route path='/cart' element={<ShoppingCart />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/terms-condition' element={<TermsAndConditions />} />
         <Route path='/cookie-policy' element={<CookiePolicyPage />} />
@@ -37,6 +36,7 @@ const App = () => {
 
         {/* protected route */}
         <Route element={<ProtectedRoute />} >
+        <Route path='/cart' element={<ShoppingCart />} />
           <Route path="/verify-otp" element={<VerifyOTP />} />
         </Route>
       </Routes>
