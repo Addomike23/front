@@ -15,7 +15,7 @@ const VerifyOTP = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email;
-     const BASE_URL = "https://myke-bern.onrender.com/auth/"
+     const BASE_URL = "https://myke-bern.onrender.com"
     axios.defaults.withCredentials = true
 
 
@@ -46,7 +46,7 @@ const VerifyOTP = () => {
         const providedCode = otp.join("");
 
         try {
-            const response = await axios.patch(`${BASE_URL}`+"verify-code", { email, providedCode });
+            const response = await axios.patch(`${BASE_URL}/auth/verify-code`, { email, providedCode });
             Cookies.set("token", response.data.token, { expires: 2 }); // Store token in cookies
             
             // setTime out for better user ui
