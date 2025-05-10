@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}api/welcome-text`);
+        const response = await axios.get(`${BASE_URL}/api/welcome-text`);
         const data = response.data;
         setWhychooseus(data.WhyChooseUs);
       } catch (error) {
