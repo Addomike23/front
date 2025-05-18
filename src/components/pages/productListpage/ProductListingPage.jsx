@@ -56,7 +56,7 @@ export default function ProductListingPage() {
       const fetchProducts = async () => {
         try {
           setLoading(true);
-          const res = await axios.get(`${LOCAL_HOST}/api/filter`, {
+          const res = await axios.get(`${BASE_URL}/api/filter`, {
             params: { search, category, sort, page, limit }
           });
           setProducts(res.data.products);
@@ -68,7 +68,7 @@ export default function ProductListingPage() {
         }
       };
       fetchProducts();
-    }, [LOCAL_HOST, category, sort, search, page]);
+    }, [BASE_URL, category, sort, search, page]);
 
     return (
       <div>
