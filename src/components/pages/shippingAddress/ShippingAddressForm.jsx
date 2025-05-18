@@ -58,7 +58,7 @@ export default function ShippingAddressForm() {
                 phone: '',
             });
 
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.error("Verification failed", error);
             toast.error("Verification failed");
