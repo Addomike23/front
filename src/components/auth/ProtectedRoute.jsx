@@ -1,12 +1,13 @@
+// src/components/auth/ProtectedRoute.jsx
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useCart } from "../pages/context/Context";
 
 const ProtectedRoute = () => {
-    const {isLoggedIn}= useCart()
+  const token = Cookies.get("Authorization");
 
-    return isLoggedIn? <Outlet/> : <Navigate to="/login" replace />;
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;
+
