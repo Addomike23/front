@@ -9,6 +9,8 @@ import {
   DollarSign,
   Smile,
 } from "lucide-react";
+import { motion } from "framer-motion";
+
 
 const WhyChooseUs = () => {
   const [whychooseus, setWhychooseus] = useState([]);
