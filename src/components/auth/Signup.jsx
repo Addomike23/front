@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { useCart } from "../pages/context/Context";
 import "./Auth.css";
 
 function Signup() {
@@ -15,9 +15,9 @@ function Signup() {
     const [mloader, setMloader] = useState(true)
     const [success, setSuccess] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const { BASE_URL } = useCart()
 
-    const BASE_URL = "https://myke-bern.onrender.com/"
-    axios.defaults.withCredentials = true;
+   
 
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const isPasswordValid = passwordPattern.test(input.password);
@@ -27,43 +27,43 @@ function Signup() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setSuccess(false);
-        setLoading(true);
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+    setLoading(true);
 
-        try {
-            if (!isPasswordValid) {
-                setError("Password must be at least 8 characters long, include a number and a special character.");
-                toast.error("Invalid password format");
-                setLoading(false);
-                return;
-            }
-
-            const response = await axios.post(`${BASE_URL}auth/signup`, input);
-            if (response.status === 201) {
-                setSuccess(true);
-                Cookies.set("authorization", response.data.signinToken, {
-                    expires: 2,
-                    secure: true,
-                    sameSite: "Strict",
-                });
-
-                toast.success("Signup successful!");
-                setTimeout(() => {
-                    navigate("/verify-otp", { state: { email: input.email } });
-                }, 1000);
-
-                setInput({ name: "", email: "", password: "" });
-            }
-        } catch (err) {
-            setError(err.response?.data?.message || "Signup failed. Try again.");
-            toast.error("Signup failed. Try again.");
-            console.log(err);
-        } finally {
+    try {
+        if (!isPasswordValid) {
+            setError("Password must be at least 8 characters long, include a number and a special character.");
+            toast.error("Invalid password format");
             setLoading(false);
+            return;
         }
-    };
+
+        const response = await axios.post(`${BASE_URL}/auth/signup`, input, {
+            withCredentials: true,
+        });
+
+        if (response.status === 201) {
+            setSuccess(true);
+            toast.success("Signup successful!");
+
+            // Redirect to OTP verification screen
+            setTimeout(() => {
+                navigate("/verify-otp", { state: { email: input.email } });
+            }, 1000);
+
+            setInput({ name: "", email: "", password: "" });
+        }
+    } catch (err) {
+        setError(err.response?.data?.message || "Signup failed. Try again.");
+        toast.error("Signup failed. Try again.");
+        console.error("Signup error:", err);
+    } finally {
+        setLoading(false);
+    }
+};
+
 
     useEffect(() => {
 
