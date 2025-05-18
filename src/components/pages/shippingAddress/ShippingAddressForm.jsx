@@ -35,7 +35,7 @@ export default function ShippingAddressForm() {
             const orderPayload = {
                 ...formData,
                 cartItems,
-                totalAmount: totalPrice + shipCharge,
+                totalAmount: (totalPrice + shipCharge) * 100,
             };
 
             const response = await axios.post(
@@ -64,7 +64,7 @@ export default function ShippingAddressForm() {
 
             // console.log(response.data);
         } catch (error) {
-            console.error("Verification failed", error);
+        
             toast.error("Verification failed");
         }
     };
