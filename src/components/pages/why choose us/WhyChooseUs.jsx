@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
+import { useCart } from "../context/Context";
+=======
 import { motion } from 'framer-motion';
+>>>>>>> b2272fa (update)
 import {
   ShieldCheck,
   ThumbsUp,
@@ -12,12 +16,12 @@ import {
 
 const WhyChooseUs = () => {
   const [whychooseus, setWhychooseus] = useState([]);
-  const BASE_URL = "http://localhost:5000/";
+  const {BASE_URL} = useCart();
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}api/welcome-text`);
+        const response = await axios.get(`${BASE_URL}/api/welcome-text`);
         const data = response.data;
         setWhychooseus(data.WhyChooseUs);
       } catch (error) {
