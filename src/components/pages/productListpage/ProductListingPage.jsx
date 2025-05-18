@@ -19,7 +19,7 @@ const categories = [
 ];
 
 export default function ProductListingPage() {
-  const { BASE_URL, LOCAL_HOST } = useCart();
+  const { BASE_URL} = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
