@@ -119,7 +119,7 @@ useEffect(() => {
   
 
   return (
-    <CartContext.Provider value={{login,logout,isLoggedIn,LOCAL_HOST,product,BASE_URL, totalPrice,totalQuantity , cartItems, addToCart, removeFromCart, increaseItemQuantity, clearCart, decreaseItemQuantity, }}>
+    <CartContext.Provider value={{login,logout,isLoggedIn,product,BASE_URL, totalPrice,totalQuantity , cartItems, addToCart, removeFromCart, increaseItemQuantity, clearCart, decreaseItemQuantity, }}>
       {children}
     </CartContext.Provider>
   );
