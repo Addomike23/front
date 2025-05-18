@@ -3,19 +3,29 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast'
 const CartContext = createContext();
 import axios from 'axios'
-import Cookies from "js-cookie";
+
 
 // Provider component
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const BASE_URL = "https://myke-bern.onrender.com";
+
+  // const LOCAL_HOST = "http://localhost:5000";
   const [product, setProduct] = useState([])
 const [isLoggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-  const token = Cookies.get("Authorization");
-  setLoggedIn(Boolean(token));
-}, [Cookies.get("Authorization")]);
+useEffect(() => {
+  const checkLogin = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/auth/status`, { withCredentials: true });
+      setLoggedIn(res.data.loggedIn);
+    } catch {
+      setLoggedIn(false);
+    }
+  };
+
+  checkLogin();
+}, []);
 
 
   const login = () => setLoggedIn(true);
@@ -44,6 +54,7 @@ const [isLoggedIn, setLoggedIn] = useState(false);
     useEffect(() => {
         fetchProduct();
     }, [])
+
 
 
   // Add item to cart
