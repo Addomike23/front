@@ -15,9 +15,8 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [mloader, setMloader] = useState(true)
     const [showPassword, setShowPassword] = useState(false);
-    const BASE_URL = "http://localhost:5000/auth/";
     const navigate = useNavigate();
-    const { login } = useCart()
+    const { login,BASE_URL } = useCart()
 
     const handleChange = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -30,7 +29,7 @@ const Login = () => {
 
         try {
             
-            const response = await axios.post(`${BASE_URL}signin`, input, {
+            const response = await axios.post(`${BASE_URL}/auth/signin`, input, {
                 withCredentials: true
               });
               
