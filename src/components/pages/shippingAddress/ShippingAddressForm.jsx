@@ -35,7 +35,7 @@ export default function ShippingAddressForm() {
             const orderPayload = {
                 ...formData,
                 cartItems,
-                totalAmount: (totalPrice + shipCharge) * 100,
+                totalAmount: (totalPrice + shipCharge),
             };
 
             const response = await axios.post(
@@ -103,7 +103,7 @@ export default function ShippingAddressForm() {
         const handler = window.PaystackPop.setup({
             key: payStackKey,
             email: formData.email,
-            amount: totalPrice * 100,
+            amount: (totalPrice + shipCharge) * 100,
             currency: "GHS",
             metadata,
             callback: function (response) {
