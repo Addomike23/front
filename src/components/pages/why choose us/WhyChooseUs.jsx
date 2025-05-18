@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 import { useCart } from "../context/Context";
-=======
-import { motion } from 'framer-motion';
->>>>>>> b2272fa (update)
 import {
   ShieldCheck,
   ThumbsUp,
