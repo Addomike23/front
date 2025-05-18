@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { useCart } from "../pages/context/Context";
 import "./Auth.css";
 
 
@@ -16,6 +17,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const BASE_URL = "http://localhost:5000/auth/";
     const navigate = useNavigate();
+    const { login } = useCart()
 
     const handleChange = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -27,15 +29,13 @@ const Login = () => {
         setLoading(true);
 
         try {
-            await axios.post(`${BASE_URL}` + "signin", input);
-
-            if (response.status === 201) {
-                setSuccess(true);
-                Cookies.set("authorization", response.data.signinToken, {
-                    expires: 2,
-                    secure: true,
-                    sameSite: "Strict",
-                });
+            
+            const response = await axios.post(`${BASE_URL}signin`, input, {
+                withCredentials: true
+              });
+              
+            if (response.status === 200) {
+                login()
 
                 toast.success("Login successful!");
                 setTimeout(() => {
@@ -47,6 +47,8 @@ const Login = () => {
 
 
         } catch (err) {
+            console.log(err);
+
             setError(err.response?.data?.message || "Login failed. Try again.");
             toast.error("Login failed. Try again.");
         } finally {

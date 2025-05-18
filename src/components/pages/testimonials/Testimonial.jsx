@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Star } from "lucide-react";
 import axios from "axios";
+import { useCart } from "../context/Context";
 
 const testimonials = [
   {
@@ -30,6 +31,15 @@ const testimonials = [
 ];
 
 export default function Testimonial() {
+  // hooks
+  const [testimonial, setTestimonial] = useState([])
+  const { BASE_URL } = useCart()
+
+
+  const fetchTestimonial = async () => {
+    const res = axios.get(`${BASE_URL}/api/testimonial`)
+    setTestimonial((await res).data)
+  }
   return (
     <div className="w-full bg-[#f9f9f9] py-16 px-6 md:px-12">
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">

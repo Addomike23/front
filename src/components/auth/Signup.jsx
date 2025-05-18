@@ -16,7 +16,7 @@ function Signup() {
     const [success, setSuccess] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const BASE_URL = "http://localhost:5000/auth/";
+    const BASE_URL = "https://myke-bern.onrender.com/"
     axios.defaults.withCredentials = true;
 
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -40,7 +40,7 @@ function Signup() {
                 return;
             }
 
-            const response = await axios.post(`${BASE_URL}signup`, input);
+            const response = await axios.post(`${BASE_URL}auth/signup`, input);
             if (response.status === 201) {
                 setSuccess(true);
                 Cookies.set("authorization", response.data.signinToken, {
@@ -59,6 +59,7 @@ function Signup() {
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed. Try again.");
             toast.error("Signup failed. Try again.");
+            console.log(err);
         } finally {
             setLoading(false);
         }
@@ -83,9 +84,9 @@ function Signup() {
                     <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-t-4 border-orange-400"></div>
                 </div>
             ) : (
-                <div className="login-bg h-screen flex items-center justify-center text-gray-900 px-10">
+                <div className="login-bg h-screen flex flex-col md:flex-row items-center justify-center text-gray-900 px-4 md:px-10 gap-8">
                     {/* Left side */}
-                    <div className="w-1/2 text-center p-6 rounded-xl shadow-lg">
+                    <div className="w-full md:w-1/2 text-center p-6 rounded-xl shadow-lg">
                         <h1 className="font-extrabold text-2xl text-white mb-4 leading-snug">
                             Welcome to <span className="text-orange-400">MykeBern Appliance</span>
                         </h1>
@@ -95,7 +96,8 @@ function Signup() {
                     </div>
 
                     {/* Right side - Signup Form */}
-                    <div className="w-1/2 flex items-center justify-center">
+                    <div className="w-full md:w-1/2 flex items-center justify-center">
+                   
                         <motion.div
                             initial={{ opacity: 0, y: -50 }}
                             animate={{ opacity: 1, y: 0 }}

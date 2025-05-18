@@ -2,11 +2,47 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast'
 const CartContext = createContext();
+import axios from 'axios'
+import Cookies from "js-cookie";
 
 // Provider component
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://myke-bern.onrender.com";
+  const LOCAL_HOST = "http://localhost:5000";
+  const [product, setProduct] = useState([])
+const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(!!Cookies.get("Authorization"));
+  }, []);
+
+  const login = () => setLoggedIn(true);
+
+  const logout = () => {
+    Cookies.remove("Authorization");
+    setLoggedIn(false);
+  };
+    
+
+    // fetch products from backend
+    const fetchProduct = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/api/products`, {
+                withCredentials: true,
+            })
+            setProduct(res.data.products)
+           
+        } catch (error) {
+        
+
+        }
+
+    }
+
+    useEffect(() => {
+        fetchProduct();
+    }, [])
 
 
   // Add item to cart
@@ -71,7 +107,7 @@ export const CartProvider = ({ children }) => {
   
 
   return (
-    <CartContext.Provider value={{BASE_URL, totalPrice,totalQuantity , cartItems, addToCart, removeFromCart, increaseItemQuantity, clearCart, decreaseItemQuantity, }}>
+    <CartContext.Provider value={{login,logout,isLoggedIn,LOCAL_HOST,product,BASE_URL, totalPrice,totalQuantity , cartItems, addToCart, removeFromCart, increaseItemQuantity, clearCart, decreaseItemQuantity, }}>
       {children}
     </CartContext.Provider>
   );

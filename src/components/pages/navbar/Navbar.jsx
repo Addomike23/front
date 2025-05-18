@@ -14,24 +14,19 @@ export default function Navbar() {
     const [scrolling, setScrolling] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [welcomeText, setWelcomeText] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const navigate = useNavigate();
+    const {logout,isLoggedIn} = useCart()
 
-    // Check if user is authenticated
-    useEffect(() => {
-        const token = Cookies.get("Authorization");
-        setIsAuthenticated(!!token);
-    }, []);
+    
 
-    // Welcome text fetch
     useEffect(() => {
         const fetchWelcomeText = async () => {
             try {
                 const response = await axios.get(`${BASE_URL}/api/welcome-text`);
                 const data = response.data;
-                setWelcomeText(data.welcomeMessages[0]); // assuming it's an array
+                setWelcomeText(data.welcomeMessages[0]);
             } catch (error) {
                 console.error("Error fetching welcome messages:", error);
             }
@@ -39,14 +34,12 @@ export default function Navbar() {
         fetchWelcomeText();
     }, []);
 
-    // Scroll effect
     useEffect(() => {
         const handleScroll = () => setScrolling(window.scrollY > 400);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Image slider
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prev) => (prev + 1) % imageSlider.length);
@@ -54,9 +47,8 @@ export default function Navbar() {
         return () => clearInterval(interval);
     }, []);
 
-    // Logout handler
     const handleLogout = () => {
-        Cookies.remove("Authorization");
+        logout()
         toast.success("Logged out successfully!");
         setIsAuthenticated(false);
         setUserMenuOpen(false);
@@ -66,14 +58,12 @@ export default function Navbar() {
     return (
         <div>
             <nav className="w-full">
-                {/* Top Nav */}
                 <div className={`fixed top-0 w-full z-10 transition-all duration-300 ${scrolling ? "bg-black shadow-lg" : "bg-transparent"}`}>
                     <div className="flex items-center justify-between px-4 py-3 text-white">
                         <h1 className="text-lg text-orange-400">
                             HOTLINE: <span className="text-sm px-3 text-white">+233 553 435 026</span>
                         </h1>
                         <div className="flex items-center gap-4">
-                            {/* Cart icon with quantity */}
                             <Link to="/cart" className="relative text-white">
                                 <FiShoppingCart className="text-2xl" />
                                 {totalQuantity > 0 && (
@@ -83,14 +73,13 @@ export default function Navbar() {
                                 )}
                             </Link>
 
-                            {/* User icon dropdown */}
                             <div className="relative">
                                 <button onClick={() => setUserMenuOpen(!userMenuOpen)}>
                                     <FiUser className="text-2xl text-white" />
                                 </button>
                                 {userMenuOpen && (
-                                    <div className="absolute right-0 mt-2 w-32 bg-white text-black shadow-md rounded-lg z-50">
-                                        {isAuthenticated ? (
+                                    <div className="absolute right-0 mt-2 w-36 bg-orange-400 text-black shadow-md rounded-lg z-50">
+                                        {isLoggedIn ? (
                                             <button
                                                 onClick={handleLogout}
                                                 className="block px-4 py-2 w-full text-left hover:bg-gray-100"
@@ -112,7 +101,6 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* Logo & Links */}
                     <div className="flex items-center justify-between px-4 py-2">
                         <h1 className="text-2xl font-bold text-white border-2 border-orange-400 px-2 py-2">
                             <Link to="/">Myke-<span className="text-orange-400">Bern</span></Link>
@@ -133,20 +121,17 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* Mobile Menu */}
                     {menuOpen && (
                         <div className="md:hidden flex flex-col items-center bg-black w-full py-4 space-y-4">
                             <Link to="/" className="text-white hover:text-orange-400" onClick={() => setMenuOpen(false)}>Home</Link>
                             <Link to="/product" className="text-white hover:text-orange-600" onClick={() => setMenuOpen(false)}>Products</Link>
                             <Link to="/service" className="text-white hover:text-orange-600" onClick={() => setMenuOpen(false)}>Service</Link>
                             <Link to="/about" className="text-white hover:text-orange-600" onClick={() => setMenuOpen(false)}>About</Link>
-                            {/* <Link to="/contact" className="text-white hover:text-orange-600" onClick={() => setMenuOpen(false)}>Contact</Link> */}
                             <Link to="/contact" className="text-white hover:text-orange-600" onClick={() => setMenuOpen(false)}>Contact</Link>
                         </div>
                     )}
                 </div>
 
-                {/* Hero Section */}
                 <div className="relative w-full h-screen overflow-hidden">
                     <div className="absolute inset-0 w-full h-full">
                         {imageSlider.map((img, index) => (
@@ -159,7 +144,6 @@ export default function Navbar() {
                         ))}
                     </div>
 
-                    {/* Overlay */}
                     <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center text-center px-4">
                         <motion.h1
                             key={`${welcomeText?.title}-${Date.now()}`}

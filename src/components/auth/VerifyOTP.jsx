@@ -1,35 +1,49 @@
-import React,{ useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import "./Auth.css"
-// import { FiLock } from "react-icons/fi";
+import "./Auth.css";
 
 const VerifyOTP = () => {
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [timer, setTimer] = useState(60);
     const inputRefs = useRef([]);
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email;
-    const BASE_URL = "http://localhost:5000/auth/";
-    axios.defaults.withCredentials = true
-
+    const BASE_URL = "http://localhost:5000";
+    axios.defaults.withCredentials = true;
 
     if (!email) navigate("/signup");
 
+    // Countdown timer for resend OTP
+    useEffect(() => {
+        if (timer > 0) {
+            const countdown = setTimeout(() => setTimer(timer - 1), 1000);
+            return () => clearTimeout(countdown);
+        }
+    }, [timer]);
+
     const handleChange = (index, value) => {
-        if (!/^\d?$/.test(value)) return; // Only allow numbers
+        if (!/^\d?$/.test(value)) return;
         const newOtp = [...otp];
         newOtp[index] = value;
         setOtp(newOtp);
 
-        // Move focus to the next input field if a number is entered
+        // Auto focus next
         if (value && index < 5) {
             inputRefs.current[index + 1].focus();
+        }
+
+        // Auto submit if all digits entered
+        if (newOtp.every((d) => d !== "")) {
+            setTimeout(() => {
+                document.getElementById("otp-form").requestSubmit();
+            }, 200);
         }
     };
 
@@ -46,29 +60,37 @@ const VerifyOTP = () => {
         const providedCode = otp.join("");
 
         try {
-            const response = await axios.patch(`${BASE_URL}`+"verify-code", { email, providedCode });
-            Cookies.set("token", response.data.token, { expires: 2 }); // Store token in cookies
-            
-            // setTime out for better user ui
-            setTimeout(()=>{
-                navigate("/") //redirect to dashboard
-            },1000)
-            
-            toast.success("OTP code Verified")
+            const response = await axios.patch(`${BASE_URL}/auth/verify-code`, { email, providedCode });
+            Cookies.set("Authorization", response.data.token, { expires: 2 });
+
+            toast.success("OTP verified! Redirecting...");
+            setTimeout(() => navigate("/"), 1500);
         } catch (error) {
             setError(error.response?.data?.message || "Invalid OTP");
             toast.error("Invalid OTP code");
         } finally {
             setLoading(false);
-            
+        }
+    };
+
+    const resendOTP = async (e) => {
+        e.preventDefault();
+        if (timer > 0) return;
+
+        try {
+            const res = await axios.patch(`${BASE_URL}/auth/send-verification-code`, { email });
+            toast.success(res.data.message);
+            setTimer(60); // Reset timer
+        } catch (error) {
+            toast.error("Failed to resend OTP");
         }
     };
 
     return (
-        <div className="login-bg flex items-center justify-center min-h-screen ">
-            <motion.div 
-                initial={{ opacity: 0, y: -50 }} 
-                animate={{ opacity: 1, y: 0 }} 
+        <div className="login-bg flex items-center justify-center min-h-screen">
+            <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 className="bg-transparent p-8 rounded-2xl shadow-lg shadow-orange-400/90 w-96"
             >
@@ -77,21 +99,19 @@ const VerifyOTP = () => {
                     Enter the 6-digit OTP sent to <span className="font-semibold">{email}</span>
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-                    {/* OTP Input Fields */}
+                <form id="otp-form" onSubmit={handleSubmit} className="mt-4 space-y-4">
                     <div className="flex justify-center gap-2">
                         {otp.map((digit, index) => (
-                          <input
-                          key={index}
-                          type="text"
-                          value={digit}
-                          onChange={(e) => handleChange(index, e.target.value)}
-                          onKeyDown={(e) => handleKeyDown(index, e)}
-                          maxLength={1}
-                          ref={(el) => (inputRefs.current[index] = el)}
-                          className="w-12 h-12 text-center text-white bg-transparent text-2xl font-semibold border-1 border-orange-400 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none"
-                      />
-                      
+                            <input
+                                key={index}
+                                type="text"
+                                value={digit}
+                                onChange={(e) => handleChange(index, e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(index, e)}
+                                maxLength={1}
+                                ref={(el) => (inputRefs.current[index] = el)}
+                                className="w-12 h-12 text-center text-white bg-transparent text-2xl font-semibold border-1 border-orange-400 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                            />
                         ))}
                     </div>
 
@@ -105,7 +125,7 @@ const VerifyOTP = () => {
                         disabled={loading}
                     >
                         {loading ? (
-                            <motion.div 
+                            <motion.div
                                 className="w-5 h-5 border-4 border-white border-t-transparent rounded-full animate-spin"
                             ></motion.div>
                         ) : "Verify OTP"}
@@ -113,7 +133,13 @@ const VerifyOTP = () => {
                 </form>
 
                 <p className="text-sm text-center text-white mt-4">
-                    Didn't receive an OTP? <span className="text-orange-400 cursor-pointer">Resend</span>
+                    Didn’t receive an OTP?{" "}
+                    <span
+                        onClick={resendOTP}
+                        className={`cursor-pointer  ${timer > 0 ? "text-green-600" : "text-orange-400"}`}
+                    >
+                        {timer > 0 ? `Resend in ${timer}s` : "Resend"}
+                    </span>
                 </p>
             </motion.div>
         </div>

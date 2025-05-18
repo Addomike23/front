@@ -1,11 +1,12 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useCart } from "../pages/context/Context";
 
-const ProtectedRoute = () => {
-    const authToken = Cookies.get("authorization");
+const ProtectedRoute = ({children}) => {
+    const {isLoggedIn}= useCart()
 
-    return authToken ? <Outlet /> : <Navigate to="/login" replace />;
+    return isLoggedIn? children: <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

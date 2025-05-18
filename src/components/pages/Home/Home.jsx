@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../navbar/Navbar";
 import Hero from "../hero/Hero";
 import Promo from "../promo/Promo";
-import ShopCategory from "../shopcategory/shopCategory";
+import ShopCategory from "../shopcategory/ShopCategory";
 import WhyChooseUs from "../why choose us/WhyChooseUs";
 import Footer from "../footer/Footer";
 import ScrollFadeIn from "../../animation/ScrollFadeIn";
@@ -12,6 +12,7 @@ import NewsletterSection from "../news/NewsletterSection";
 import ContactPage from "../contact/ContactPage";
 import Services from "../services/Services";
 import AutoPlayVideo from "../autoplay/AutoPlayVideo";
+import TrendingBrands from "../tradebrands/TrendingBrands";
 
 
 
@@ -65,19 +66,16 @@ export default function Home() {
                             <Promo />
                         </ScrollFadeIn>
 
-                        {/* Why choosae us */}
-                        <ScrollFadeIn direction="up">
-                            <WhyChooseUs />
-                        </ScrollFadeIn>
+
                         {/* Hero section */}
                         {/* Shop by category */}
                         <ScrollFadeIn direction="up">
                             <ShopCategory category={category} setCategory={setCategory} />
                         </ScrollFadeIn>
 
-                        <ScrollFadeIn direction="up">
-                            <Hero category={category} />
-                        </ScrollFadeIn>
+                        {/* <ScrollFadeIn direction="up"> */}
+                        <Hero category={category} />
+                        {/* </ScrollFadeIn> */}
 
                         {/* auto play video */}
                         <ScrollFadeIn direction="up">
@@ -87,6 +85,11 @@ export default function Home() {
                         {/* contact page */}
                         <ScrollFadeIn direction="up">
                             <ContactPage />
+                        </ScrollFadeIn>
+
+                        {/* Why choosae us */}
+                        <ScrollFadeIn direction="up">
+                            <WhyChooseUs />
                         </ScrollFadeIn>
 
                         {/* news letter */}
@@ -100,6 +103,10 @@ export default function Home() {
                             <Testimonial />
                         </ScrollFadeIn>
 
+                        {/* trade brands */}
+                        {/* <ScrollFadeIn direction="up">
+                            <TrendingBrands />
+                        </ScrollFadeIn> */}
                         {/*  footer section*/}
                         <ScrollFadeIn direction="up">
                             <Footer />

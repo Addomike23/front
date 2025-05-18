@@ -13,6 +13,9 @@ import CookiePolicyPage from './components/pages/cookie-policy/CookiePolicyPage'
 import Fag from './components/pages/fag/Fag'
 import TrackOrder from './components/pages/trackOrder/TrackOrder'
 import Services from './components/pages/services/Services'
+import ShippingAddressForm from './components/pages/shippingAddress/ShippingAddressForm'
+import ProductListingPage from './components/pages/productListpage/ProductListingPage'
+import ProductDetailsPage from './components/pages/productDetails/ProductDetailsPage'
 
 
 
@@ -32,12 +35,16 @@ const App = () => {
         <Route path='/terms-condition' element={<TermsAndConditions />} />
         <Route path='/cookie-policy' element={<CookiePolicyPage />} />
         <Route path="/faq" element={<Fag />} />
-        <Route path="/track-order" element={<TrackOrder />} />
         <Route path='/service' element={<Services />} />
+        <Route path='/product' element={<ProductListingPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
 
         {/* protected route */}
         <Route element={<ProtectedRoute />} >
-          <Route path="/verify-otp" element={<VerifyOTP />} />
+        <Route path="/track-order" element={<TrackOrder />} />
+        <Route path='/shipping-form' element={<ShippingAddressForm />} />
+
         </Route>
       </Routes>
       <CookiePolicy />
