@@ -9,13 +9,14 @@ import Cookies from "js-cookie";
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const BASE_URL = "https://myke-bern.onrender.com";
-  const LOCAL_HOST = "http://localhost:5000";
   const [product, setProduct] = useState([])
 const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(!!Cookies.get("Authorization"));
-  }, []);
+  const token = Cookies.get("Authorization");
+  setLoggedIn(Boolean(token));
+}, [Cookies.get("Authorization")]);
+
 
   const login = () => setLoggedIn(true);
 
