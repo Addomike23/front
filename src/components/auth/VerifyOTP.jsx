@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import "./Auth.css";
+import { useCart } from "../pages/context/Context";
 
 const VerifyOTP = () => {
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -15,8 +15,7 @@ const VerifyOTP = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email;
-    const BASE_URL = "http://localhost:5000";
-    axios.defaults.withCredentials = true;
+    const {BASE_URL} = useCart()
 
     if (!email) navigate("/signup");
 
@@ -53,25 +52,30 @@ const VerifyOTP = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setLoading(true);
-        const providedCode = otp.join("");
+   const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+  const providedCode = otp.join("");
 
-        try {
-            const response = await axios.patch(`${BASE_URL}/auth/verify-code`, { email, providedCode });
-            Cookies.set("Authorization", response.data.token, { expires: 2 });
+  try {
+    const response = await axios.patch(`${BASE_URL}/auth/verify-code`, {
+      email,
+      providedCode
+    }, {
+      withCredentials: true 
+    });
 
-            toast.success("OTP verified! Redirecting...");
-            setTimeout(() => navigate("/"), 1500);
-        } catch (error) {
-            setError(error.response?.data?.message || "Invalid OTP");
-            toast.error("Invalid OTP code");
-        } finally {
-            setLoading(false);
-        }
-    };
+    toast.success("OTP verified! Redirecting...");
+    setTimeout(() => navigate("/"), 1500);
+  } catch (error) {
+    setError(error.response?.data?.message || "Invalid OTP");
+    toast.error("Invalid OTP code");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     const resendOTP = async (e) => {
         e.preventDefault();
