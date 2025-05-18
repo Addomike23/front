@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SubNavbar from '../navbar/SubNav';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../footer/Footer';
 import { useCart } from '../context/Context';
@@ -21,7 +22,7 @@ export default function ShippingAddressForm() {
         phone: '',
     });
     const {BASE_URL, clearCart, cartItems, totalPrice, totalQuantity } = useCart()
-    // const BASE_URL = "http://localhost:5000"
+    const navigate = useNavigate()
     // paystack public key
     const payStackKey = `${import.meta.env.VITE_PAYSTACK_PUBLIC_LIVE_KEY}`
 
@@ -57,6 +58,9 @@ export default function ShippingAddressForm() {
                 country: '',
                 phone: '',
             });
+
+            // navigate to home page
+            navigate("/")
 
             // console.log(response.data);
         } catch (error) {
