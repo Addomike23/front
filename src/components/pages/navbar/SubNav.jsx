@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useCart } from "../context/Context";
 import { FiShoppingCart, FiMenu, FiX, FiUser } from "react-icons/fi";
@@ -8,19 +7,14 @@ import { FiShoppingCart, FiMenu, FiX, FiUser } from "react-icons/fi";
 export default function SubNavbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
-    const { totalQuantity } = useCart();
-
-    useEffect(() => {
-        const token = Cookies.get("Authorization");
-        setIsAuthenticated(!!token);
-    }, []);
+    const { totalQuantity,logout,isLoggedIn } = useCart();
+    
+    
 
     const handleLogout = () => {
-        Cookies.remove("Authorization");
+        logout()
         toast.success("Logged out successfully!");
-        setIsAuthenticated(false);
         setUserMenuOpen(false);
         setTimeout(() => navigate("/login"), 1000);
     };
@@ -49,8 +43,8 @@ export default function SubNavbar() {
                             <FiUser className="text-2xl text-white" />
                         </button>
                         {userMenuOpen && (
-                            <div className="absolute right-0 mt-2 w-32 bg-white text-black shadow-md rounded-lg z-50">
-                                {isAuthenticated ? (
+                            <div className="absolute right-0 mt-2 w-36 bg-orange-400 text-black shadow-md rounded-lg z-50">
+                                {isLoggedIn ? (
                                     <button
                                         onClick={handleLogout}
                                         className="block px-4 py-2 w-full text-left hover:bg-gray-100"
@@ -60,8 +54,8 @@ export default function SubNavbar() {
                                 ) : (
                                     <Link
                                         to="/login"
-                                        className="block px-4 py-2 hover:bg-gray-100"
                                         onClick={() => setUserMenuOpen(false)}
+                                        className="block px-4 py-2 hover:bg-gray-100"
                                     >
                                         Sign In
                                     </Link>
@@ -84,7 +78,7 @@ export default function SubNavbar() {
                     <Link to="/service" className="hover:text-orange-600">Service</Link>
                     <Link to="/about" className="hover:text-orange-600">About</Link>
                     <Link to="/contact" className="hover:text-orange-600">Contact</Link>
-                    
+
                 </div>
 
                 <div className="md:hidden">
