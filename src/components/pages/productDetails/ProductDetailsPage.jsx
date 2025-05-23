@@ -15,16 +15,16 @@ export default function ProductDetailsPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`${LOCAL_HOST}/api/product/${id}`);
+        const res = await axios.get(`${BASE_URL}/api/product/${id}`);
         setProduct(res.data);
       } catch (error) {
-        console.error("Error fetching product:", error);
+     
       } finally {
         setLoading(false);
       }
     };
     fetchProduct();
-  }, [id, LOCAL_HOST]);
+  }, [id, BASE_URL]);
 
   if (loading) {
     return (
