@@ -105,7 +105,7 @@ export default function FeaturedProducts() {
                                     </span>
                                 )}
                                 <span className="text-sm font-semibold text-gray-900">
-                                    ${product.price}
+                                    GH₵ {product.price}
                                 </span>
                             </div>
 
