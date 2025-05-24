@@ -151,7 +151,7 @@ export default function ProductListingPage() {
                           </h3>
                           {/* <p className="text-gray-600 text-sm mt-1 truncate">{product.description}</p> */}
                           {/* <p className="text-gray-500 text-sm mt-1 capitalize">{product.category}</p> */}
-                          <p className="text-green-600 font-medium mt-2">₵{product.price.toFixed(2)}</p>
+                          <p className="text-green-600 font-medium mt-2">GH₵ {product.price.toFixed(2)}</p>
                           <p className="text-xs text-orange-400 mt-1">{product.stock>0? "In Stock": "Out of Stock"}</p>
                         </div>
                       </Link>
