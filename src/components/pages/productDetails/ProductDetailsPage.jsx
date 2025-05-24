@@ -70,7 +70,7 @@ export default function ProductDetailsPage() {
               <span className="font-medium">Category:</span> {product.category}
             </p>
             <p className="text-green-600 text-2xl font-semibold mb-2">
-              ₵{product.price.toFixed(2)}
+              GH₵ {product.price.toFixed(2)}
             </p>
             <p className={`text-sm font-medium mb-4 ${product.stock > 0 ? "text-green-500" : "text-red-500"}`}>
               {product.stock > 0 ? "In stock" : "Out of stock"}
