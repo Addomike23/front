@@ -51,7 +51,7 @@ const Hero = ({ category }) => {
 
                             {/* Price & Cart Icon */}
                             <div className="mt-3 flex items-center justify-between w-full  ">
-                                <p className="text-lg pr-2 font-bold text-orange-500"> ₵{latest.price}</p>
+                                <p className="text-lg pr-2 font-bold text-orange-500"> GH₵ {latest.price}</p>
                                 <button
                                     onClick={() => addToCart(latest)}
                                     className="bg-gray-800 text-white p-3 rounded-full hover:bg-orange-500 transition"
