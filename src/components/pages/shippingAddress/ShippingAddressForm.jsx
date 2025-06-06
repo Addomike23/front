@@ -27,7 +27,7 @@ export default function ShippingAddressForm() {
     const payStackKey = `${import.meta.env.VITE_PAYSTACK_PUBLIC_LIVE_KEY}`
 
 
-    const shipCharge = totalQuantity > 0 ? 50 : 0;
+    const shipCharge = totalQuantity > 0 ? 5 : 0;
     const [loading, setLoading] = useState(true);
     // callback handler
     const handleSuccess = async (reference) => {
