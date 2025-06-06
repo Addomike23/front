@@ -49,12 +49,12 @@ export const menuImages = [
     {
         id: 2,
         img: cooker_1,
-        category: "cooker"
+        category: "rice cooker"
     },
     {
         id: 3,
         img: donut_1,
-        category: "donut"
+        category: "donut machine"
     },
     {
         id: 4,
