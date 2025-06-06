@@ -51,14 +51,16 @@ export default function Home() {
                         <Navbar />
                         {/* <HeroBanner/> */}
 
-                        {/* service */}
-                        <ScrollFadeIn direction="left">
-                            <Services />
-                        </ScrollFadeIn>
+                        
 
                         {/* featured products */}
                         <ScrollFadeIn direction="up">
                             <FeaturedProducts />
+                        </ScrollFadeIn>
+
+                        {/* service */}
+                        <ScrollFadeIn direction="left">
+                            <Services />
                         </ScrollFadeIn>
 
                         {/* Promo section */}
