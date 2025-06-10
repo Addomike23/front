@@ -20,9 +20,16 @@ export default function ProductListingPage() {
   const [mloading, setmLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setmLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+        const handlePageLoad = () => setLoading(false);
+
+        if (document.readyState === "complete") {
+            handlePageLoad();
+        } else {
+            window.addEventListener("load", handlePageLoad);
+        }
+
+        return () => window.removeEventListener("load", handlePageLoad);
+    }, []);
 
   const updateFilter = (key, value) => {
     const updatedParams = new URLSearchParams(searchParams);
