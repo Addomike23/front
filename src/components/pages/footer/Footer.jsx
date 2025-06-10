@@ -16,9 +16,9 @@ const Footer = () => {
                 <div>
                     <h3 className="font-bold mb-3">OUR STORES</h3>
                     <p className="text-sm text-gray-50 leading-snug max-w-md">
-  From the heart of Dhaka — between the vibrant streets of Paltan and the elegance of Gulshan —
+  From the heart of Accra — between the vibrant streets of Osu and the elegance of Kumasi —
                         <span className="text-orange-400 font-semibold">MykeBern Appliance</span> 
-                        was born out of a passion to make modern living simpler.
+                         was born out of a passion to make modern living simpler.
                         What started in a small corner office has now grown into a trusted name in households across Ghana,
                         bringing smart kitchen solutions closer to families, food lovers, and everyday cooks.
 </p>
@@ -46,14 +46,15 @@ const Footer = () => {
                     <ul className="space-y-2">
 
 
-                        <ul className="space-y-2 text-sm">
-                            <li><Link to="/terms-condition" className="hover:underline font-bold">TERMS & CONDITION</Link></li>
-                            <li><Link to="/faq" className="hover:underline font-bold">FAQ</Link></li>
-                            <li><Link to="/payments" className="hover:underline font-bold">PAYMENTS</Link></li>
-                            <li><Link to="/privacy-policy" className="hover:underline font-bold">PRIVACY</Link></li>
-                            <li><Link to="/track-order" className="hover:underline font-bold">TRACK ORDER</Link></li>
-                            <li><Link to="/services" className="hover:underline font-bold">SERVICES</Link></li>
-                        </ul>
+                        <ul className="text-xs text-gray-50 space-y-1">
+  <li><Link to="/terms-condition" className="hover:underline font-bold">TERMS & CONDITION</Link></li>
+  <li><Link to="/faq" className="hover:underline font-bold">FAQ</Link></li>
+  <li><Link to="/payments" className="hover:underline font-bold">PAYMENTS</Link></li>
+  <li><Link to="/privacy-policy" className="hover:underline font-bold">PRIVACY</Link></li>
+  <li><Link to="/track-order" className="hover:underline font-bold">TRACK ORDER</Link></li>
+  <li><Link to="/services" className="hover:underline font-bold">SERVICES</Link></li>
+</ul>
+
 
                     </ul>
                 </div>
