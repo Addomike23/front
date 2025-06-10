@@ -61,7 +61,7 @@ const Footer = () => {
                 {/* Menu Links */}
                 <div>
                     <h3 className="font-bold mb-3">MENU</h3>
-                    <ul className="space-y-2">
+                    <ul className="text-xs space-y-2">
                         <li><a href="#" className="hover:underline font-bold">WELCOME</a></li>
                         <li><a href="#" className="hover:underline font-bold">PRODUCTS</a></li>
                         <li><a href="#" className="hover:underline font-bold">ABOUT</a></li>
