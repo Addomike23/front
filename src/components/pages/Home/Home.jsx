@@ -33,7 +33,7 @@ export default function Home() {
     return (
         <div>
             {loading ? (
-                
+                // ✅ Your original spinner
                 <div className="flex items-center justify-center h-screen bg-gray-800">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-orange-400"></div>
                 </div>
@@ -77,3 +77,30 @@ export default function Home() {
 
                     {/* Why Choose Us */}
                     <ScrollFadeIn direction="up">
+                        <WhyChooseUs />
+                    </ScrollFadeIn>
+
+                    {/* Newsletter */}
+                    <ScrollFadeIn direction="up">
+                        <NewsletterSection />
+                    </ScrollFadeIn>
+
+                    {/* Testimonials */}
+                    <ScrollFadeIn direction="up">
+                        <Testimonial />
+                    </ScrollFadeIn>
+
+                    {/* Optional: Trending Brands */}
+                    {/* <ScrollFadeIn direction="up">
+                        <TrendingBrands />
+                    </ScrollFadeIn> */}
+
+                    {/* Footer */}
+                    <ScrollFadeIn direction="up">
+                        <Footer />
+                    </ScrollFadeIn>
+                </div>
+            )}
+        </div>
+    );
+}
