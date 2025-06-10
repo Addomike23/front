@@ -17,8 +17,7 @@ const Footer = () => {
                     <h3 className="font-bold mb-3">OUR STORES</h3>
                     <p className="text-sm text-gray-50 leading-snug max-w-md">
   From the heart of Accra — between the vibrant streets of Osu and the elegance of Kumasi —
-                        <span className="text-orange-400 font-semibold">MykeBern Appliance</span> 
-                         was born out of a passion to make modern living simpler.
+                        <span className="text-orange-400 font-semibold">MykeBern Appliance </span> was born out of a passion to make modern living simpler.
                         What started in a small corner office has now grown into a trusted name in households across Ghana,
                         bringing smart kitchen solutions closer to families, food lovers, and everyday cooks.
 </p>
