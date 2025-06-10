@@ -34,7 +34,8 @@ function Signup() {
 
     try {
         if (!isPasswordValid) {
-            setError("Password must be at least 8 characters long, include a number and a special character.");
+            setError("Password must be 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+            
             toast.error("Invalid password format");
             setLoading(false);
             return;
