@@ -15,10 +15,14 @@ const Footer = () => {
                 {/* Store Info */}
                 <div>
                     <h3 className="font-bold mb-3">OUR STORES</h3>
-                    <p>45 / 1 Purana Paltan Lane,<br />Paltan, Dhaka-1000,<br />Bangladesh</p>
-                    <p className="mt-2">+88 123 456 789</p>
-                    <p className="mt-4">85 / 1 Gulshan Avenue,<br />Dhaka-1200,<br />Bangladesh</p>
-                    <p className="mt-2">+88 123 456 779</p>
+                    <p className="text-sm text-gray-50 leading-snug max-w-md">
+  From the heart of Dhaka — between the vibrant streets of Paltan and the elegance of Gulshan —
+                        <span className="text-orange-400 font-semibold">MykeBern Appliance</span> 
+                        was born out of a passion to make modern living simpler.
+                        What started in a small corner office has now grown into a trusted name in households across Ghana,
+                        bringing smart kitchen solutions closer to families, food lovers, and everyday cooks.
+</p>
+
                     <div className="flex space-x-3 mt-4 text-white">
                         <a href="#" className="bg-blue-600 p-2 rounded-full"><FaFacebookF /></a>
                         <a href="#" className="bg-red-600 p-2 rounded-full"><FaGooglePlusG /></a>
@@ -28,12 +32,13 @@ const Footer = () => {
                 </div>
 
                 {/* Blog Post */}
-                <div>
-                    <h3 className="font-bold mb-3">BLOG POST</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                </div>
+                <div className="text-sm text-white leading-snug max-w-md">
+  <h3 className="font-bold text-white mb-2 text-base">BLOG POST</h3>
+  <p>
+    Your kitchen deserves more than ordinary. At <span className="text-orange-400 font-semibold">MykeBern Appliance</span>, we deliver smart, energy-efficient solutions that make everyday cooking easier and more enjoyable. From high-performance blenders to time-saving tools, we bring innovation to your home.
+  </p>
+</div>
+
 
                 {/* Support Links */}
                 <div>
