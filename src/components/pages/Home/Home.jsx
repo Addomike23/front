@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Navbar from "../navbar/Navbar";
 import Hero from "../hero/Hero";
 import Promo from "../promo/Promo";
@@ -12,111 +13,104 @@ import NewsletterSection from "../news/NewsletterSection";
 import ContactPage from "../contact/ContactPage";
 import Services from "../services/Services";
 import AutoPlayVideo from "../autoplay/AutoPlayVideo";
-import TrendingBrands from "../tradebrands/TrendingBrands";
-
-
-
 
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
-    const [category, setCategory] = useState("All")
-
-
-
+    const [category, setCategory] = useState("All");
 
     useEffect(() => {
+        const handlePageLoad = () => setLoading(false);
 
-        const timer = setTimeout(() => setLoading(false), 2000);
-        return () => clearTimeout(timer);
+        if (document.readyState === "complete") {
+            handlePageLoad();
+        } else {
+            window.addEventListener("load", handlePageLoad);
+        }
 
-    }, [])
-
-
-
-
+        return () => window.removeEventListener("load", handlePageLoad);
+    }, []);
 
     return (
-        < div className="" >
-
+        <div>
             {loading ? (
-                <div className="flex items-center justify-center h-screen  bg-gray-800">
-                    <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-orange-400"></div>
+                
+                <div className="flex items-center justify-center h-screen bg-gray-900">
+                    <motion.div
+                        className="w-20 h-20 border-4 border-orange-500 border-t-transparent rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                    />
                 </div>
-            ) :
-                (
-                    <div>
-                        {/* Navbar section */}
+            ) : (
+                // ✅ Page content with fade-in
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    {/* Navbar */}
+                    <Navbar />
 
-                        <Navbar />
-                        {/* <HeroBanner/> */}
+                    {/* Featured Products */}
+                    <ScrollFadeIn direction="up">
+                        <FeaturedProducts />
+                    </ScrollFadeIn>
 
-                        
+                    {/* Services */}
+                    <ScrollFadeIn direction="left">
+                        <Services />
+                    </ScrollFadeIn>
 
-                        {/* featured products */}
-                        <ScrollFadeIn direction="up">
-                            <FeaturedProducts />
-                        </ScrollFadeIn>
+                    {/* Promo */}
+                    <ScrollFadeIn direction="up">
+                        <Promo />
+                    </ScrollFadeIn>
 
-                        {/* service */}
-                        <ScrollFadeIn direction="left">
-                            <Services />
-                        </ScrollFadeIn>
+                    {/* Category Section */}
+                    <ScrollFadeIn direction="up">
+                        <ShopCategory category={category} setCategory={setCategory} />
+                    </ScrollFadeIn>
 
-                        {/* Promo section */}
-                        <ScrollFadeIn direction="up">
-                            <Promo />
-                        </ScrollFadeIn>
+                    {/* Hero Section */}
+                    <Hero category={category} />
 
+                    {/* AutoPlay Video */}
+                    <ScrollFadeIn direction="up">
+                        <AutoPlayVideo />
+                    </ScrollFadeIn>
 
-                        {/* Hero section */}
-                        {/* Shop by category */}
-                        <ScrollFadeIn direction="up">
-                            <ShopCategory category={category} setCategory={setCategory} />
-                        </ScrollFadeIn>
+                    {/* Contact */}
+                    <ScrollFadeIn direction="up">
+                        <ContactPage />
+                    </ScrollFadeIn>
 
-                        {/* <ScrollFadeIn direction="up"> */}
-                        <Hero category={category} />
-                        {/* </ScrollFadeIn> */}
+                    {/* Why Choose Us */}
+                    <ScrollFadeIn direction="up">
+                        <WhyChooseUs />
+                    </ScrollFadeIn>
 
-                        {/* auto play video */}
-                        <ScrollFadeIn direction="up">
-                            <AutoPlayVideo />
-                        </ScrollFadeIn>
+                    {/* Newsletter */}
+                    <ScrollFadeIn direction="up">
+                        <NewsletterSection />
+                    </ScrollFadeIn>
 
-                        {/* contact page */}
-                        <ScrollFadeIn direction="up">
-                            <ContactPage />
-                        </ScrollFadeIn>
+                    {/* Testimonials */}
+                    <ScrollFadeIn direction="up">
+                        <Testimonial />
+                    </ScrollFadeIn>
 
-                        {/* Why choosae us */}
-                        <ScrollFadeIn direction="up">
-                            <WhyChooseUs />
-                        </ScrollFadeIn>
+                    {/* Optional: Trending Brands */}
+                    {/* <ScrollFadeIn direction="up">
+                        <TrendingBrands />
+                    </ScrollFadeIn> */}
 
-                        {/* news letter */}
-                        <ScrollFadeIn direction="up">
-                            <NewsletterSection />
-                        </ScrollFadeIn>
-
-                        {/* testimonials */}
-
-                        <ScrollFadeIn direction="up">
-                            <Testimonial />
-                        </ScrollFadeIn>
-
-                        {/* trade brands */}
-                        {/* <ScrollFadeIn direction="up">
-                            <TrendingBrands />
-                        </ScrollFadeIn> */}
-                        {/*  footer section*/}
-                        <ScrollFadeIn direction="up">
-                            <Footer />
-                        </ScrollFadeIn>
-                    </div>
-                )
-            }
-
+                    {/* Footer */}
+                    <ScrollFadeIn direction="up">
+                        <Footer />
+                    </ScrollFadeIn>
+                </motion.div>
+            )}
         </div>
     );
 }
