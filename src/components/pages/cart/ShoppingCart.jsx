@@ -10,7 +10,7 @@ export default function ShoppingCart() {
 
     const { BASE_URL, totalPrice, totalQuantity, cartItems, increaseItemQuantity, decreaseItemQuantity, removeFromCart } = useCart()
     let Delivery;
-    const shipCharge = totalQuantity > 0 ? Delivery = 5 : Delivery = 0;
+    const shipCharge = totalQuantity > 0 ? Delivery = 20 : Delivery = 0;
     const [loading, setLoading] = useState(true);
 
 
@@ -136,7 +136,7 @@ export default function ShoppingCart() {
                                             className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
                                             disabled
                                         >
-                                            <option>{`Standard Delivery -  ₵${shipCharge.toFixed(2)}`}</option>
+                                            <option>{`Delivery within Accra -  ₵${shipCharge.toFixed(2)}`}</option>
                                         </select>
                                     </div>
 
