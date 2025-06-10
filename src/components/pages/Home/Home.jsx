@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Navbar from "../navbar/Navbar";
 import Hero from "../hero/Hero";
 import Promo from "../promo/Promo";
@@ -13,7 +12,7 @@ import NewsletterSection from "../news/NewsletterSection";
 import ContactPage from "../contact/ContactPage";
 import Services from "../services/Services";
 import AutoPlayVideo from "../autoplay/AutoPlayVideo";
-
+// import TrendingBrands from "../tradebrands/TrendingBrands"; // optional
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
@@ -35,20 +34,11 @@ export default function Home() {
         <div>
             {loading ? (
                 
-                <div className="flex items-center justify-center h-screen bg-gray-900">
-                    <motion.div
-                        className="w-20 h-20 border-4 border-orange-500 border-t-transparent rounded-full"
-                        animate={{ rotate: 360 }}
-                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                    />
+                <div className="flex items-center justify-center h-screen bg-gray-800">
+                    <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-orange-400"></div>
                 </div>
             ) : (
-                // ✅ Page content with fade-in
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
+                <div>
                     {/* Navbar */}
                     <Navbar />
 
@@ -80,37 +70,10 @@ export default function Home() {
                         <AutoPlayVideo />
                     </ScrollFadeIn>
 
-                    {/* Contact */}
+                    {/* Contact Page */}
                     <ScrollFadeIn direction="up">
                         <ContactPage />
                     </ScrollFadeIn>
 
                     {/* Why Choose Us */}
                     <ScrollFadeIn direction="up">
-                        <WhyChooseUs />
-                    </ScrollFadeIn>
-
-                    {/* Newsletter */}
-                    <ScrollFadeIn direction="up">
-                        <NewsletterSection />
-                    </ScrollFadeIn>
-
-                    {/* Testimonials */}
-                    <ScrollFadeIn direction="up">
-                        <Testimonial />
-                    </ScrollFadeIn>
-
-                    {/* Optional: Trending Brands */}
-                    {/* <ScrollFadeIn direction="up">
-                        <TrendingBrands />
-                    </ScrollFadeIn> */}
-
-                    {/* Footer */}
-                    <ScrollFadeIn direction="up">
-                        <Footer />
-                    </ScrollFadeIn>
-                </motion.div>
-            )}
-        </div>
-    );
-}
