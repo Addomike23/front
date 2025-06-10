@@ -167,7 +167,7 @@ function Signup() {
                                     </div>
                                     {/* Password pattern guidance */}
                                     <p className={`text-xs mt-1 ${isPasswordValid ? "text-green-400" : "text-red-400"}`}>
-                                        Must be 8+ characters, include a number & special character.
+                                        Must be 8+ characters, include one uppercase, one lowercase, a number & special character.
                                     </p>
                                 </div>
 
