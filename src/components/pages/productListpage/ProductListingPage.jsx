@@ -20,7 +20,7 @@ export default function ProductListingPage() {
   const [mloading, setmLoading] = useState(true);
 
   useEffect(() => {
-        const handlePageLoad = () => setLoading(false);
+        const handlePageLoad = () => setmLoading(false);
 
         if (document.readyState === "complete") {
             handlePageLoad();
