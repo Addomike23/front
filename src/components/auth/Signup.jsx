@@ -19,7 +19,7 @@ function Signup() {
 
    
 
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,60}$/;
     const isPasswordValid = passwordPattern.test(input.password);
 
     const handleChange = (e) => {
