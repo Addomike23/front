@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie'
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,useLocation, useNavigate } from "react-router-dom";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useCart } from "../pages/context/Context";
@@ -17,6 +17,10 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const { login,BASE_URL } = useCart()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+
 
     const handleChange = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -38,7 +42,7 @@ const Login = () => {
 
                 toast.success("Login successful!");
                 setTimeout(() => {
-                    navigate("/");
+                 navigate(from, { replace: true });
                 }, 1000);
 
                 setInput({ email: "", password: "" });
